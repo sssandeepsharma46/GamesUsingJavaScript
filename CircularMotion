@@ -1,0 +1,31 @@
+var can=document.createElement("canvas");
+    can.style.backgroundColor="black";
+    can.width=500;
+    can.height=350;
+    document.body.appendChild(can);
+    var ctx=can.getContext("2d");
+    var rotatPosX, rotatPosY;
+    var axisRadius=100;
+    var angleInRad=360/(Math.PI*2);
+    var bRad=20, bxPos=can.width/2, byPos=can.height/2;
+    function drawBall(){
+      ctx.beginPath();
+      ctx.arc(rotatPosX, rotatPosY,bRad,0,Math.PI*2);
+      ctx.fillStyle="white";
+      ctx.fill();
+      ctx.closePath();
+    }
+    
+    function updatePositions(){
+      rotatPosX=bxPos+axisRadius*(Math.cos(angleInRad));
+      rotatPosY=byPos+axisRadius*(Math.sin(angleInRad));
+    }
+
+    function plotCanvas(){
+      updatePositions();
+      ctx.clearRect(0,0,can.width, can.height);
+      drawBall();
+      angleInRad+=0.03;
+      
+    }
+setInterval(plotCanvas, 10);
